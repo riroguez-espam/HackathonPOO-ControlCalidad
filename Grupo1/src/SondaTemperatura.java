@@ -4,6 +4,17 @@ public class SondaTemperatura {
     private String codigo;
     private boolean calibrada;
 
+    // Construtor conrregido para la tarea
+    public SondaTemperatura(String codigo, boolean calibrado) {
+        setCodigo(codigo);
+        setCalibrada(calibrado);
+    }
+
+    // Constructo sobrecargado
+    public SondaTemperatura(String codigo) {
+        this(codigo, false);
+    }
+
     // Getters y Setters
     public String getCodigo() {
         return codigo;
@@ -12,8 +23,7 @@ public class SondaTemperatura {
     public void setCodigo(String codigo) {
         // Validamos que el codigo no este vacio
         if (codigo == null || codigo.isBlank()) {
-            System.out.println("El codigo de la sonda no puede estar vacio");
-            return;
+            throw new IllegalArgumentException("El codigo de la sonda no puede estar vacio");
         } else {
             this.codigo = codigo;
         }
@@ -25,11 +35,6 @@ public class SondaTemperatura {
 
     public void setCalibrada(boolean calibrada) {
         this.calibrada = calibrada;
-    }
-
-    // Constructor
-    public SondaTemperatura() {
-
     }
 
     // Metodo para leer la temperatura interna del pescado (FUNCIONALIDAD)

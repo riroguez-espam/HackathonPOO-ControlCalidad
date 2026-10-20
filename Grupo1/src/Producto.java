@@ -18,8 +18,7 @@ public class Producto {
     public void setEspecie(String especie) {
         // Validamos que la especie no este vacia
         if (especie == null || especie.isBlank()) {
-            System.out.println("La especie no puede estar vacia");
-            return;
+            throw new IllegalArgumentException("La especie no puede estar vacio");
         } else {
             this.especie = especie;
         }
@@ -32,8 +31,7 @@ public class Producto {
     public void setNombre(String nombre) {
         // Validamos que el nombre no este vacio
         if (nombre == null || nombre.isBlank()) {
-            System.out.println("El nombre no puede estar vacio");
-            return;
+            throw new IllegalArgumentException("El nombre no puede estar vacio");
         } else {
             this.nombre = nombre;
         }

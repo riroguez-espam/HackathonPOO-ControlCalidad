@@ -12,6 +12,15 @@ public class FormularioControlCalidad {
     private List<Muestra> muestras;
     private boolean cerrado;
 
+    // Constructor
+    public FormularioControlCalidad(String fechaProduccion, String lote, Analista analista) {
+        setFechaProduccion(fechaProduccion);
+        setLote(lote);
+        setAnalista(analista);
+        this.muestras = new ArrayList<Muestra>();
+        this.cerrado = false;
+    }
+
     // Getters y Setters
     public String getFechaProduccion() {
         return fechaProduccion;
@@ -23,7 +32,7 @@ public class FormularioControlCalidad {
             LocalDate.parse(fechaProduccion);
             this.fechaProduccion = fechaProduccion;
         } catch (DateTimeParseException | NullPointerException e) {
-            System.out.println("La fecha de produccion debe ser valida (yyyy-MM-dd)");
+            throw new IllegalArgumentException("La fecha de produccion debe ser valida (yyyy-MM-dd)");
         }
     }
 
@@ -34,8 +43,7 @@ public class FormularioControlCalidad {
     public void setLote(String lote) {
         // Validamos el formato del lote (ej: L-2026-A)
         if (lote == null || !lote.matches("L-\\d{4}-[A-Z]")) {
-            System.out.println("El lote debe tener el formato L-0000-A");
-            return;
+            throw new IllegalArgumentException("El lote debe tener el formato L-0000-A");
         } else {
             this.lote = lote;
         }
@@ -48,8 +56,7 @@ public class FormularioControlCalidad {
     public void setAnalista(Analista analista) {
         // Trazabilidad: el analista debe tener codigo y fecha de inicio de muestra
         if (analista == null || analista.getCodigoEmpleado() == null || analista.getFechaInicioMuestra() == null) {
-            System.out.println("El analista debe tener codigo de empleado y fecha de inicio de muestra");
-            return;
+            throw new IllegalArgumentException("El analista debe tener codigo de empleado y fecha de inicio de muestra");
         } else {
             this.analista = analista;
         }
@@ -57,16 +64,6 @@ public class FormularioControlCalidad {
 
     public boolean isCerrado() {
         return cerrado;
-    }
-
-    // Constructor
-    public FormularioControlCalidad() {
-
-    }
-
-    public FormularioControlCalidad(String fechaProduccion, String lote) {
-        setFechaProduccion(fechaProduccion);
-        setLote(lote);
     }
 
     // Agregar una muestra analizada al formulario

@@ -8,6 +8,11 @@ public class Muestra {
     private Double temperatura;
     private Boolean apto; // null = aun sin validar
 
+    public Muestra(Producto producto, Double temperatura) {
+        setProducto(producto);
+        setTemperatura(temperatura);
+    }
+
     // Getters y Setters
     public Producto getProducto() {
         return producto;
@@ -16,8 +21,7 @@ public class Muestra {
     public void setProducto(Producto producto) {
         // Validamos que la muestra tenga un producto evaluado
         if (producto == null) {
-            System.out.println("El producto no puede estar vacio");
-            return;
+            throw new IllegalArgumentException("El producto no puede estar vacio");
         } else {
             this.producto = producto;
         }
@@ -30,8 +34,7 @@ public class Muestra {
     public void setTemperatura(Double temperatura) {
         // Validamos que exista una lectura de la sonda
         if (temperatura == null) {
-            System.out.println("La temperatura no puede estar vacia");
-            return;
+            throw new IllegalArgumentException("La temperatura no puede estar vacia");
         } else {
             this.temperatura = temperatura;
             // Cada nueva lectura se valida automaticamente
@@ -47,11 +50,6 @@ public class Muestra {
     // Indica si la muestra ya tiene lectura validada
     public boolean isValidada() {
         return apto != null;
-    }
-
-    // Constructor
-    public Muestra() {
-
     }
 
     // Metodo para validar la condicion critica: APTO si <= 4.0 °C, NO APTO si > 4.0 °C
