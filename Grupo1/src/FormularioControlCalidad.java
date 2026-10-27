@@ -12,7 +12,14 @@ public class FormularioControlCalidad {
     private List<Muestra> muestras;
     private boolean cerrado;
 
-    // Constructor
+    // Constructor por defecto
+    public FormularioControlCalidad() {
+        this.fechaProduccion = LocalDate.now().toString();
+        this.muestras = new ArrayList<>();
+        this.cerrado = false;
+    }
+
+    // Constructor parametrizado
     public FormularioControlCalidad(String fechaProduccion, String lote, Analista analista) {
         setFechaProduccion(fechaProduccion);
         setLote(lote);
