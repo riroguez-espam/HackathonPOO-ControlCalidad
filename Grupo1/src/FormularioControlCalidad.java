@@ -105,12 +105,6 @@ public class FormularioControlCalidad {
 
     // Mostrar muestras del formulario
     public List<Muestra> getMuestras() {
-
-        if (muestras == null) {
-            System.out.println("No hay muestras registradas");
-            return null;
-        }
-
         return muestras;
     }
 
